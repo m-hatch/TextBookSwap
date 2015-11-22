@@ -1,16 +1,17 @@
 <!doctype html>
-<html>
+<html ng-app="bkApp">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title>City Tech TextBook Swap</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-<link href='https://fonts.googleapis.com/css?family=Libre+Baskerville:400italic' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="css/styles.css" type="text/css" media="screen, print, projection"/>
-<link rel="stylesheet" href="css/form-login.css" type="text/css"/>
+  <meta charset="utf-8">
+  <base href="http://localhost/textbookswap/">
+  <title>City Tech TextBook Swap</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <link href='https://fonts.googleapis.com/css?family=Libre+Baskerville:400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/form-login.css" type="text/css"/>
+  <link rel="stylesheet" href="css/form-search.css" type="text/css"/>
+  <link rel="stylesheet" href="css/styles.css" type="text/css" media="screen, print, projection"/>
 
-<!--<script type="text/javascript" src="js.js"></script>-->
-
-<!--[if IE 8]>     <html class="ie8"> <![endif]-->
+  <!--[if IE 8]>     <html class="ie8"> <![endif]-->
 </head>
 
 <body>
@@ -19,8 +20,9 @@
     <header>
 
       <div id="top_banner">
-        <h1><a href="">TextBook Swap</a></h1>
+        <h1><a href="index.html">TextBook Swap</a></h1>
         <h4>Buy and sell your used textbooks!</h4>
+
         <div id="signin">
 
           <a href="#login" class="loginBtn">Login</a>
@@ -55,7 +57,7 @@
 
                     <div class="form-row">
                       <div class="center">
-                        <a href="#" class="loginBtn">Sign up</a>
+                        <a href="#" class="loginBtn">Log in</a>
                       </div>
                     </div>
 
@@ -114,7 +116,8 @@
             </div>
           </div>
 
-        </div>
+        </div><!-- end #signin -->
+
       </div>
 
       <div id="nav">
@@ -125,10 +128,10 @@
       <nav id="primary_nav">
         <ul>
             <li><a href="">About</a></li>
-            <li><a href="">Titles</a></li>
-            <li><a href="">Authors</a></li>
-            <li><a href="">Courses</a></li>
-            <li><a href="">My Account</a></li>
+            <li><a href="titles">Titles</a></li>
+            <li><a href="authors">Authors</a></li>
+            <li><a href="courses">Courses</a></li>
+            <li><a href="account">My Account</a></li>
         </ul>
       </nav>
 
@@ -137,128 +140,12 @@
     
 
     <!-- MAIN CONTAINER -->
-    <div class="container">
+    <div ng-controller="mainCtrl" class="container">
       <div class="span-24 view full_screen">
-        <ul class="bk-grid">
-          <!-- loop items -->
-          <li class="view_sec">
-            <div class="bk-item">
-              <div class="view_img">
-                <a href="#" title="">
-                  <img src="img/CST_4709.jpg" alt=" "/>
-                </a>
-              </div>
 
-              <div class="center">
-                <h5>
-                  <a class="link" href="#" title="Web Server Administration">Web Server Administration</a>
-                </h5>
-              </div>
-                    
-              <div class="clear"></div>
-               
-              <div class="bk-info">
-                <h4 class="center">              
-                  <a class="link" href="#" title="Web Server Administration">Web Server Administration</a>
-                </h4>
-                  <p><img src="img/calendar.png" class="left"/><a href="#" class="left">Item description</a></p>
-                  <p><img src="img/contact.png" class="left"/><a href="mailto:abc@user.com" class="left">Contact seller</a></p>
-                  <p><img src="img/like.png" class="left"/><a href="#" class="left">Add To Favourites</a></p>
-                  <p><img src="img/delete.png" class="left"/><a href="#" class="left">Remove Favourite</a></p>
-                  <p class="description center">Admiral Adama leads Galactica's final battle and rescues Hera from the C...</p>
-                </div>
-              </div>
-            </li>
+        <!-- content -->
+        <div id="page-content" ng-view></div>
 
-        <!-- loop items 2 -->
-          <li class="view_sec">
-            <div class="bk-item">
-              <div class="view_img">
-                <a href="#" title="">
-                  <img src="img/BUS_2425.jpg" alt=" "/>
-                </a>
-              </div>
-
-              <div class="center">
-                <h5>
-                  <a class="link" href="#" title="Web Server Administration">Web Server</a>
-                </h5>
-              </div>
-                    
-              <div class="clear"></div>
-               
-              <div class="bk-info">
-                <h4 class="center">              
-                  <a class="link" href="#" title="Web Server Administration">Web Server Administration</a>
-                </h4>
-                  <p><img src="img/calendar.png" class="left"/><a href="http://www.thedaretube.com/tv/battlestar-galactica/season/4/episode/20" class="left">Item description</a></p>
-                  <p><img src="img/contact.png" class="left"/><a href="javascript:void(0);" onclick="popUp('#popup_login');" class="left">Contact seller</a></p>
-                  <p><img src="img/like.png" class="left"/><a href="javascript:void(0);" onclick="popUp('#popup_login');"  class="left">Add To Favourites</a></p>
-                  <p><img src="img/delete.png" class="left"/><a href="javascript:void(0);" onclick="popUp('#popup_login');" class="left">Remove Favourite</a></p>
-                  <p class="description center">Admiral Adama leads Galactica's final battle and rescues Hera from the C...</p>
-                </div>
-              </div>
-            </li> 
-            <!-- loop items 3 -->
-          <li class="view_sec">
-            <div class="bk-item">
-              <div class="view_img">
-                <a href="#" title="">
-                  <img src="img/ENG_2700.jpg" alt=" "/>
-                </a>
-              </div>
-
-              <div class="center">
-                <h5>
-                  <a class="link" href="#" title="Web Server Administration">Web Server Administration</a>
-                </h5>
-              </div>
-                    
-              <div class="clear"></div>
-               
-              <div class="bk-info">
-                <h4 class="center">              
-                  <a class="link" href="#" title="Web Server Administration">Web Server Administration</a>
-                </h4>
-                  <p><img src="img/calendar.png" class="left"/><a href="http://www.thedaretube.com/tv/battlestar-galactica/season/4/episode/20" class="left">Item description</a></p>
-                  <p><img src="img/contact.png" class="left"/><a href="javascript:void(0);" onclick="popUp('#popup_login');" class="left">Contact seller</a></p>
-                  <p><img src="img/like.png" class="left"/><a href="javascript:void(0);" onclick="popUp('#popup_login');"  class="left">Add To Favourites</a></p>
-                  <p><img src="img/delete.png" class="left"/><a href="javascript:void(0);" onclick="popUp('#popup_login');" class="left">Remove Favourite</a></p>
-                  <p class="description center">Admiral Adama leads Galactica's final battle and rescues Hera from the C...</p>
-                </div>
-              </div>
-            </li> 
-            <!-- loop items 4 -->
-          <li class="view_sec">
-            <div class="bk-item">
-              <div class="view_img">
-                <a href="#" title="">
-                  <img src="img/CST_3513.jpg" alt=" "/>
-                </a>
-              </div>
-
-              <div class="center">
-                <h5>
-                  <a class="link" href="#" title="Web Server Administration">Web Server Administration</a>
-                </h5>
-              </div>
-                    
-              <div class="clear"></div>
-               
-              <div class="bk-info">
-                <h4 class="center">              
-                  <a class="link" href="#" title="Web Server Administration">Web Server Administration</a>
-                </h4>
-                  <p><img src="img/calendar.png" class="left"/><a href="http://www.thedaretube.com/tv/battlestar-galactica/season/4/episode/20" class="left">Item description</a></p>
-                  <p><img src="img/contact.png" class="left"/><a href="javascript:void(0);" onclick="popUp('#popup_login');" class="left">Contact seller</a></p>
-                  <p><img src="img/like.png" class="left"/><a href="javascript:void(0);" onclick="popUp('#popup_login');"  class="left">Add To Favourites</a></p>
-                  <p><img src="img/delete.png" class="left"/><a href="javascript:void(0);" onclick="popUp('#popup_login');" class="left">Remove Favourite</a></p>
-                  <p class="description center">Admiral Adama leads Galactica's final battle and rescues Hera from the C...</p>
-                </div>
-              </div>
-            </li> 
-
-        </ul>
       </div><!-- end .full_screen -->
 
       <div class="clear"></div>
@@ -277,6 +164,10 @@
 
   </div><!-- end .wrapper -->
 
+  <!-- javascript -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <script src="js/angular-route.min.js"></script>
+  <script src="js/app.js"></script>
   <!-- copyright -->
   <script>
     var today = new Date();
