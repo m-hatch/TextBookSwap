@@ -4,14 +4,14 @@
   <li class="view_sec" ng-repeat="book in books">
     <div class="bk-item">
       <div class="view_img" dynamic-height>
-        <a href="#" title="">
+        <a ng-href="books/{{ book.id }}" title="">
           <img ng-src="img/{{ book.image }}" alt=" "/>
         </a>
       </div>
 
       <div class="center">
         <h5>
-          <a class="link" href="#" title="">{{ book.title }}</a>
+          <a class="link" ng-href="books/{{ book.id }}" title="">{{ book.title }}</a>
         </h5>
       </div>
             
@@ -19,9 +19,9 @@
        
       <div class="bk-info">
         <h4 class="center">              
-          <a class="link" href="#" title="">{{ book.title }}</a>
+          <a class="link" ng-href="books/{{ book.id }}" title="">{{ book.title }}</a>
         </h4>
-          <p><img src="img/calendar.png" class="left"/><a href="#" class="left">Item description</a></p>
+          <p><img src="img/calendar.png" class="left"/><a ng-href="books/{{ book.id }}" class="left">Item description</a></p>
           <p><img src="img/contact.png" class="left"/><a href="mailto:abc@user.com" class="left">Contact seller</a></p>
           <p><img src="img/like.png" class="left"/><a href="#" class="left">Add To Favourites</a></p>
           <p><img src="img/delete.png" class="left"/><a href="#" class="left">Remove Favourite</a></p>

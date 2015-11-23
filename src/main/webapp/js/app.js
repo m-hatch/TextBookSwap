@@ -31,10 +31,9 @@ app.config(function($routeProvider, $locationProvider){
     controller: 'accountCtrl',
     activetab: 'account'
   })
-  .when('/media/:id', {
-    templateUrl: 'pages/media-detail.html',
-    controller: 'mediaCtrl',
-    activetab: 'media'
+  .when('/books/:id', {
+    templateUrl: 'views/detail.html',
+    controller: 'bookCtrl',
   })
   // catch all
   .otherwise({ redirectTo: '/' });
@@ -136,15 +135,22 @@ app.controller('authorCtrl', function($scope, $http, $route, SearchService) {
 });
 
 app.controller('courseCtrl', function($scope, $http, $route, SearchService) {
-	  $scope.books = null;
-	  $scope.placeholder = "search dept/course...";
-	  $http.get('http://localhost/textbookswap/webapi/books')
-	  .success(function(response){
-		  $scope.allbooks = response;
-	  });
-	  // filter results on button click
-	  $scope.search = function(){
-		  $scope.books = SearchService.filtered_result($scope.allbooks, $scope.query, "course");
-	  }
-	  $scope.$route = $route;
-	});
+  $scope.books = null;
+  $scope.placeholder = "search dept/course...";
+  $http.get('http://localhost/textbookswap/webapi/books')
+  .success(function(response){
+	  $scope.allbooks = response;
+  });
+  // filter results on button click
+  $scope.search = function(){
+	  $scope.books = SearchService.filtered_result($scope.allbooks, $scope.query, "course");
+  }
+  $scope.$route = $route;
+});
+
+app.controller('bookCtrl', function($scope, $http, $routeParams) {
+  $http.get('http://localhost/textbookswap/webapi/books/'  + $routeParams.id)
+  .success(function(response){
+	  $scope.book = response;
+  });
+});

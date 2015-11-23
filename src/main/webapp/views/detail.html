@@ -1,0 +1,16 @@
+<div id="book-detail">
+
+  <div class="detail_img">
+    <img ng-src="img/{{ book.image }}" alt=" "/>
+  </div>
+
+  <div class="details">
+    <h1>{{ book.title }}</h1>
+    <h2>by&nbsp;{{ book.author }}</h2>
+    <h4>Course:&nbsp;{{ book.dept + " " + book.course }}</h4>
+    <h4>Price:&nbsp;&dollar;{{ book.price }}</h4>
+    <p>Date posted:&nbsp;{{ book.date }}<br>
+    <a href="">Email seller</a></p>
+  </div>
+
+</div>
