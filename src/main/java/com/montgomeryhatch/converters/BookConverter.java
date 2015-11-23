@@ -15,7 +15,8 @@ public class BookConverter {
         BasicDBObjectBuilder builder = BasicDBObjectBuilder.start()
                 .append("title", b.getTitle()).append("dept", b.getDept())
                 .append("course", b.getCourse()).append("image",  b.getImage())
-                .append("price", b.getPrice()).append("date", b.getDate());
+                .append("price", b.getPrice()).append("date", b.getDate())
+                .append("author", b.getAuthor());
         if (b.getId() != null)
             builder = builder.append("_id", new ObjectId(b.getId()));
         if (b.getUser() != null)
@@ -28,6 +29,7 @@ public class BookConverter {
     public static Book toBook(DBObject doc) {
     	Book b = new Book();
         b.setTitle((String) doc.get("title"));
+        b.setAuthor((String) doc.get("author"));
         b.setDept((String) doc.get("dept"));
         b.setCourse((String) doc.get("course"));
         b.setImage((String) doc.get("image"));

@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteBase http://localhost/textbookswap/
+RewriteCond %{REQUEST_FILENAME] !-d
+RewriteCond %{REQUEST_FILENAME] !-f
+RewriteRule ^(.*)$ index.html [L]

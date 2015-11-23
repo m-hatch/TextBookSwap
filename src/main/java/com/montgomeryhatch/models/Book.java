@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Book {
-	private String id, user, title, dept, course, image, price, date;
+	private String id, user, title, author, dept, course, image, price, date;
 
 	public Book(){
 		
@@ -41,6 +41,14 @@ public class Book {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	public String getDept() {

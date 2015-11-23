@@ -49,4 +49,5 @@ public class BookResource {
 	public void deleteBook(@PathParam("bookId") String id){
 		bookService.deleteBook(id);
 	}
+	
 }

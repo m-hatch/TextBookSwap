@@ -29,8 +29,8 @@ public class BookService {
 		
 		while(cursor.hasNext()){
 			DBObject dbObj = cursor.next();
-			Book usrObj = BookConverter.toBook(dbObj);
-	        books.add(usrObj);
+			Book bkObj = BookConverter.toBook(dbObj);
+	        books.add(bkObj);
 	    }  
 		
 		return books;

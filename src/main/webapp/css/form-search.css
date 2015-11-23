@@ -1,7 +1,7 @@
 .form-search{
     /*margin: 0 auto;*/
     /*text-align: center;*/
-
+	padding: 20px 10px;
     font: bold 13px sans-serif;
     max-width: 325px;
     position: relative;

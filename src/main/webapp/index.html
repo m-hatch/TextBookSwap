@@ -219,21 +219,5 @@
     }
   </script>
 
-  <!-- dynamic img height -->
-  <script>
-    window.onload = dynamicHeight;
-    window.onresize = dynamicHeight;
-
-    function dynamicHeight() {
-      var imgs = document.getElementsByClassName("view_img");
-
-      for(var i=0;i<imgs.length;i++){
-        var height = imgs[i].clientWidth * 1.25;
-
-        imgs[i].style.height = height + "px";
-      }
-    };
-  </script>
-
 </body>
 </html>

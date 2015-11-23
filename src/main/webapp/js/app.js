@@ -7,7 +7,7 @@ app.config(function($routeProvider, $locationProvider){
   $routeProvider
 
   .when('/', {
-    templateUrl: 'views/home.html',
+    templateUrl: 'views/books.html',
     controller: 'mainCtrl',
     activetab: 'home'
   })
@@ -44,6 +44,69 @@ app.config(function($routeProvider, $locationProvider){
 });
 
 
-app.controller('mainCtrl', function($scope) {
+app.controller('mainCtrl', function($scope, $http, $route) {
+  $http.get('http://localhost/textbookswap/webapi/books')
+  .success(function(response){
+	  $scope.books = response;
+  });
+  $scope.$route = $route;
+});
+
+app.directive('dynamicHeight', ['$window', function($window) {
+    return {
+        link: function(scope, elem, attrs) {
+            scope.onResize = function() {
+                var item = document.getElementsByClassName('view_img')[0];
+                var height = item.clientWidth * 1.25;
+                elem.css('height', height + 'px');
+            }
+            scope.onResize();
+
+            angular.element($window).bind('resize', function() {
+                scope.onResize();
+            })
+        }
+    }
+}]);
+
+app.controller('titlesCtrl', function($scope, $http, $route) {
+  $scope.books = null;
+  $http.get('http://localhost/textbookswap/webapi/books')
+  .success(function(response){
+	  $scope.allbooks = response;
+  });
   
+  $scope.filtered_result = function(input, query) {
+    // returns nothing if nothing in query box
+    if (!query) return '';
+
+    //split query terms by space character
+    var terms = query.split(' ');
+    var output = [];
+
+    // iterate through input array
+    input.forEach(function(product){
+      var found = false;
+      passTest = true;
+
+      // iterate through terms found in query box
+      terms.forEach(function(term){
+       
+        // if all terms are found set boolean to true
+        found = (product.title.toLowerCase().indexOf(term.toLowerCase()) > -1);
+        
+        passTest = passTest && found;
+      });
+
+      // Add product to output array only if passTest is true -- all search terms were found in product
+      if (passTest) { output.push(product); }
+    });
+
+    return output;
+  }
+  // filter results on button click
+  $scope.search = function(){
+	  $scope.books = $scope.filtered_result($scope.allbooks, $scope.query);
+  }
+  $scope.$route = $route;
 });
