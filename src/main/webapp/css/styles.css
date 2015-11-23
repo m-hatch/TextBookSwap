@@ -150,6 +150,9 @@ header {
 .close:hover {
   background: #6caee0;
 }
+#user-msg {
+  display: none;
+}
 
 /* navigation */
 #nav {

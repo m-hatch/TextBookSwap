@@ -43,6 +43,55 @@ app.config(function($routeProvider, $locationProvider){
 });
 
 
+app.controller('headerCtrl', function($scope, $http) {
+  
+  //addEventListener('load', login, false);
+  $scope.login = function(){
+	  $scope.usr = "Joey";
+	  $http.get('http://localhost/textbookswap/webapi/users/validate/' 
+			  + $scope.username + "/" + $scope.password)
+	  .success(function(response){
+		  $scope.user = response;
+		  $scope.showbtns = {
+		      'display': 'none'
+		  };
+		  $scope.showmsg = {
+		      'display': 'block'
+		  };
+	  })
+	  .error(function(data, status) {
+		  alert("Incorrect username or password.")
+	  });
+  }
+  $scope.logout = function(){
+	  $scope.user = null;
+	  $scope.showbtns = {
+	      'display': 'block'
+	  };
+	  $scope.showmsg = {
+	      'display': 'none'
+	  };
+  }
+  $scope.signup = function(){
+	  var data = JSON.stringify({
+          username: $scope.username,
+          password: $scope.password,
+          email: $scope.email
+      });
+	  console.log(data);
+	  $http.post('http://localhost/textbookswap/webapi/users', data)
+	  .success(function(response){
+		  $scope.user = response
+		  $scope.showbtns = {
+		      'display': 'none'
+		  };
+		  $scope.showmsg = {
+		      'display': 'block'
+		  };
+	  });
+  }
+});
+
 app.controller('mainCtrl', function($scope, $http, $route) {
   $http.get('http://localhost/textbookswap/webapi/books')
   .success(function(response){

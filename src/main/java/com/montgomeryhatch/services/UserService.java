@@ -76,4 +76,14 @@ public class UserService {
 				.append("_id", u_id).get();
 		col.remove(query);
 	}
+	
+	public User validateUser(String uname, String pass){
+		DBCollection col = DatabaseConnection.getUsersCol();
+		BasicDBObject query = new BasicDBObject();
+		query.put("username", uname);
+		query.put("password", pass);
+		DBObject user = col.findOne(query);
+		
+		return UserConverter.toUser(user);
+	}
 }

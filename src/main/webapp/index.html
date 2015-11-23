@@ -17,7 +17,7 @@
 <body>
   <div class="wrapper"> 
 
-    <header>
+    <header ng-controller="headerCtrl">
 
       <div id="top_banner">
         <h1><a href="index.html">TextBook Swap</a></h1>
@@ -25,14 +25,16 @@
 
         <div id="signin">
 
-          <a href="#login" class="loginBtn">Login</a>
-          <a href="#signup" class="loginBtn">Sign up</a>
+		  <div ng-style="showbtns">
+            <a href="#login" class="loginBtn">Login</a>
+            <a href="#signup" class="loginBtn">Sign up</a>
+          </div>
 
           <div id="login" class="modal">
             <div>
               <a href="#close" title="Close" class="close">X</a>
 
-              <form class="form-login" method="post" action="#">
+              <form class="form-login">
 
                 <div class="form-log-in-with-email">
                   <div class="form-white-background">
@@ -44,20 +46,20 @@
                     <div class="form-row">
                       <label>
                         <span>Username</span>
-                        <input type="text" name="username">
+                        <input type="text" name="username" ng-model="username">
                       </label>
                     </div>
 
                     <div class="form-row">
                       <label>
                         <span>Password</span>
-                        <input type="password" name="password">
+                        <input type="password" name="password" ng-model="password">
                       </label>
                     </div>
 
                     <div class="form-row">
                       <div class="center">
-                        <a href="#" class="loginBtn">Log in</a>
+                        <a href="#" class="loginBtn" ng-click="login()">Log in</a>
                       </div>
                     </div>
 
@@ -65,14 +67,14 @@
                 </div><!-- end .form-log-in-with-email -->
 
             </form>
-
             </div>
           </div>
+          
           <div id="signup" class="modal">
             <div>
               <a href="#close" title="Close" class="close">X</a>
 
-              <form class="form-login" method="post" action="#">
+              <form class="form-login">
 
                 <div class="form-log-in-with-email">
                   <div class="form-white-background">
@@ -84,27 +86,27 @@
                     <div class="form-row">
                       <label>
                         <span>Email</span>
-                        <input type="email" name="email">
+                        <input type="text" name="email" ng-model="email">
                       </label>
                     </div>
 
                     <div class="form-row">
                       <label>
                         <span>Username</span>
-                        <input type="text" name="username">
+                        <input type="text" name="username" ng-model="username">
                       </label>
                     </div>
 
                     <div class="form-row">
                       <label>
                         <span>Password</span>
-                        <input type="password" name="password">
+                        <input type="password" name="password" ng-model="password">
                       </label>
                     </div>
 
                     <div class="form-row">
                       <div class="center">
-                        <a href="#" class="loginBtn">Sign up</a>
+                        <a href="#" class="loginBtn" ng-click="signup()">Sign up</a>
                       </div>
                     </div>
 
@@ -112,9 +114,12 @@
                 </div><!-- end .form-log-in-with-email -->
 
             </form>
-
             </div>
           </div>
+
+		  <div id="user-msg" ng-style="showmsg">
+		    <p>Welcome {{ user.username }}!&nbsp;<a href="" ng-click="logout()">Log out</a></p>
+		  </div>
 
         </div><!-- end #signin -->
 

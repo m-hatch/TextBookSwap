@@ -43,4 +43,11 @@ public class UsersResource {
 	public void deleteUser(@PathParam("userId") String id){
 		userService.deleteUser(id);
 	}
+	
+	@GET
+	@Path("/validate/{uname}/{pass}")
+	public User validateUser(@PathParam("uname") String uname, 
+			@PathParam("pass") String pass){
+		return userService.validateUser(uname, pass);
+	}
 }
