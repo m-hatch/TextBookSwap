@@ -50,4 +50,9 @@ public class BookResource {
 		bookService.deleteBook(id);
 	}
 	
+	@GET
+	@Path("/title/{query}")
+	public List<Book> getByTitle(@PathParam("query") String title){
+		return bookService.getByTitle(title);
+	}
 }

@@ -76,4 +76,22 @@ public class BookService {
 				.append("_id", b_id).get();
 		col.remove(query);
 	}
+	
+	public List<Book> getByTitle(String title){
+		List<Book> books = new ArrayList<>();
+		
+		DBCollection col = DatabaseConnection.getBooksCol();
+		BasicDBObject query = new BasicDBObject();
+		String regex = "/" + title + "/i";
+		query.put("title", java.util.regex.Pattern.compile(regex));
+		DBCursor cursor = col.find(query);
+		
+		while(cursor.hasNext()){
+			DBObject dbObj = cursor.next();
+			Book usrObj = BookConverter.toBook(dbObj);
+	        books.add(usrObj);
+	    }  
+		
+		return books;
+	}
 }

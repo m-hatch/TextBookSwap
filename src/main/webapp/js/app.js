@@ -1,6 +1,6 @@
 
 // base module
-var app = angular.module('bkApp', ['ngRoute']);
+var app = angular.module('bkApp', ['ngRoute', 'ngCookies']);
 
 // configure routes
 app.config(function($routeProvider, $locationProvider){
@@ -43,34 +43,30 @@ app.config(function($routeProvider, $locationProvider){
 });
 
 
-app.controller('headerCtrl', function($scope, $http) {
-  
+app.controller('headerCtrl', function($scope, $http, $cookies) {
+	if(typeof $cookies.getAll() != 'undefined'){
+	  set();
+	  hide();
+	}
+	
   //addEventListener('load', login, false);
   $scope.login = function(){
-	  $scope.usr = "Joey";
 	  $http.get('http://localhost/textbookswap/webapi/users/validate/' 
 			  + $scope.username + "/" + $scope.password)
 	  .success(function(response){
-		  $scope.user = response;
-		  $scope.showbtns = {
-		      'display': 'none'
-		  };
-		  $scope.showmsg = {
-		      'display': 'block'
-		  };
+		  $cookies.put('username', response.username);
+		  $cookies.put('id', response.id);
+		  set();
+		  hide();
 	  })
 	  .error(function(data, status) {
 		  alert("Incorrect username or password.")
 	  });
   }
   $scope.logout = function(){
-	  $scope.user = null;
-	  $scope.showbtns = {
-	      'display': 'block'
-	  };
-	  $scope.showmsg = {
-	      'display': 'none'
-	  };
+	  $cookies.remove('username');
+	  $cookies.remove('id');
+	  show();
   }
   $scope.signup = function(){
 	  var data = JSON.stringify({
@@ -78,17 +74,27 @@ app.controller('headerCtrl', function($scope, $http) {
           password: $scope.password,
           email: $scope.email
       });
-	  console.log(data);
+	  //console.log(data);
 	  $http.post('http://localhost/textbookswap/webapi/users', data)
 	  .success(function(response){
-		  $scope.user = response
-		  $scope.showbtns = {
-		      'display': 'none'
-		  };
-		  $scope.showmsg = {
-		      'display': 'block'
-		  };
+		  $cookies.put('username', response.username);
+		  $cookies.put('id', response.id);
+		  set();
+		  hide();
 	  });
+  }
+  
+  function show(){
+	  $scope.showbtns = {'display': 'block'};
+	  $scope.showmsg = {'display': 'none'};
+  }
+  function hide(){
+	  $scope.showbtns = {'display': 'none'};
+	  $scope.showmsg = {'display': 'block'};
+  }
+  function set(){
+	  $scope.u_name = $cookies.get('username');
+	  $scope.u_id = $cookies.get('id');
   }
 });
 
@@ -100,6 +106,7 @@ app.controller('mainCtrl', function($scope, $http, $route) {
   $scope.$route = $route;
 });
 
+// dynamic height
 app.directive('dynamicHeight', ['$window', function($window) {
     return {
         link: function(scope, elem, attrs) {
@@ -143,6 +150,8 @@ app.service('SearchService', function(){
 	    	if(field == "course")
 	    		found = (product.dept.toLowerCase().indexOf(term.toLowerCase()) > -1)
 	    		|| (product.course.toLowerCase().indexOf(term.toLowerCase()) > -1);
+	    	if(field == "user")
+	    		found = (product.user.indexOf(term) > -1);
 	        
 	        passTest = passTest && found;
 	      });
@@ -202,4 +211,22 @@ app.controller('bookCtrl', function($scope, $http, $routeParams) {
   .success(function(response){
 	  $scope.book = response;
   });
+});
+
+app.controller('accountCtrl', function($scope, $http, $route, $cookies) {
+	$scope.books = null;
+	if(typeof $cookies.getAll() != 'undefined'){
+		$scope.u_name = $cookies.get('username');
+		$scope.u_id = $cookies.get('id');
+	}
+	
+	$http.get('http://localhost/textbookswap/webapi/books')
+	.success(function(response){
+		$scope.allbooks = response;
+	});
+	// filter results on button click
+	$scope.search = function(){
+		$scope.user.books = SearchService.filtered_result($scope.allbooks, $scope.user.id, "user");
+	}
+    $scope.$route = $route;
 });
