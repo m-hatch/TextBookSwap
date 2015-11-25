@@ -5,7 +5,7 @@
 	<div ng-if="user">
 		<h3><em>Welcome&nbsp;{{ user.username }}!</em></h3>
 		<h1>User Details</h1>
-		<a href="" class="hlink">Edit details</a>
+		<a href="" ng-click="showAccount()" class="hlink">Edit details</a>
 		
 		<table id="user-info">
 		  <tr>
@@ -42,14 +42,61 @@
 		      <div class="bk-info">
 		        <h4 class="center">{{ book.title }}</h4>
 		        <p><img src="img/calendar.png" class="left"/><a href="" class="left">Edit book</a></p>
-		        <p><img src="img/delete.png" class="left"/><a href="" ng-click="remove(book.id)" class="left">Remove book</a></p>
+		        <p><img src="img/delete.png" class="left"/><a href="" ng-click="removeBk(book.id)" class="left">Remove book</a></p>
 		        <p class="description center">{{ book.author }}<br>{{ book.dept + " " + book.course }}</p>
 		      </div>
 		    </div>
 		   </li>
 		 </ul>
+	  
+	  <!-- modal windows -->
+	  <div id="edit-account" class="modal" ng-style="modal" >
+         <div>
+           <a href="" ng-click="closeModal()" title="Close" class="close">X</a>
 
-		
-	</div>
+           <form class="form-login">
+
+             <div class="form-log-in-with-email">
+               <div class="form-white-background">
+
+                 <div class="form-title-row">
+                   <h1>Edit</h1>
+                 </div>
+
+                 <div class="form-row">
+                   <label>
+                     <span>Email</span>
+                     <input type="text" name="email" ng-model="user.email">
+                   </label>
+                 </div>
+
+                 <div class="form-row">
+                   <label>
+                     <span>Username</span>
+                     <input type="text" name="username" ng-model="user.username">
+                   </label>
+                 </div>
+
+                 <div class="form-row">
+                   <label>
+                     <span>Password</span>
+                     <input type="password" name="password" ng-model="user.password">
+                   </label>
+                 </div>
+
+                 <div class="form-row">
+                   <div class="center">
+                     <a href="" class="loginBtn" ng-click="editAccount()">Edit</a>
+                   </div>
+                 </div>
+
+               </div>
+             </div><!-- end .form-log-in-with-email -->
+
+         </form>
+         </div>
+       </div>
+
+	</div><!-- end user -->
   
 </div>

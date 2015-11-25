@@ -225,11 +225,8 @@ app.controller('accountCtrl', function($scope,
 		$http, $route, $cookies, SearchService, popupService) {
 	$scope.books = null;
 	$scope.user = null;
-	if(typeof $cookies.get('username') != 'undefined'){
-		$scope.u_name = $cookies.get('username');
-		$scope.u_id = $cookies.get('id');
-	}
-
+	getUser();
+	
 	$http.get('http://localhost/textbookswap/webapi/users/' + $scope.u_id)
 	.success(function(response){
 		$scope.user = response;
@@ -240,7 +237,29 @@ app.controller('accountCtrl', function($scope,
 		search();
 	});
 	
-	$scope.remove = function(id) {
+	$scope.showAccount = function() {
+		$scope.modal = {'opacity': '1', 'pointer-events': 'auto'}
+	};
+	
+	$scope.editAccount = function() {
+		var data = JSON.stringify({
+            username: $scope.user.username,
+            password: $scope.user.password,
+            email: $scope.user.email,
+            id: $scope.user.id
+        });
+		$http.put('http://localhost/textbookswap/webapi/users/' + $scope.user.id, data)
+		.success(function(response){
+			$scope.user = response;
+		});
+		$scope.modal = {'opacity': '0', 'pointer-events': 'none'}
+	};
+	
+	$scope.closeModal = function() {
+		$scope.modal = {'opacity': '0', 'pointer-events': 'none'}
+	};
+	
+	$scope.removeBk = function(id) {
 	  if (popupService.showPopup('Are you sure you want to delete this?')) {
 	    $http.delete('http://localhost/textbookswap/webapi/books/' + id);
 	    $route.reload();
@@ -250,6 +269,12 @@ app.controller('accountCtrl', function($scope,
     $scope.$route = $route;
     
     function search(){
-  	  $scope.books = SearchService.filtered_result($scope.allbooks, "CST", "course");
+  	  $scope.books = SearchService.filtered_result($scope.allbooks, $scope.u_id, "user");
+    }
+    function getUser(){
+		if(typeof $cookies.get('username') != 'undefined'){
+			$scope.u_name = $cookies.get('username');
+			$scope.u_id = $cookies.get('id');
+		}
     }
 });
