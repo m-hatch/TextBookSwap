@@ -32,10 +32,21 @@ html, body {
 .clear{
   clear:both;
 }
+em {
+  font-style: italic;
+}
+.hlink:link, .hlink:visited {
+	color: blue;
+	text-decoration: none;
+}
+.hlink:hover {
+	color: #05B8CC;
+	text-decoration: underline;
+}
 
 /*header*/
 header {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 #top_banner {
   position: relative;
@@ -346,7 +357,7 @@ p#copy {
   display:inline;
 }
 .bk-info h4{
-  color:#fff;
+  color:#04bfea;
   text-transform:uppercase;
   letter-spacing:2px;
   font-size:15px;
@@ -480,6 +491,27 @@ html.ie8 .bk-item:hover .bk-info{
 	margin-top: 26px;
     margin-left: 5px;
     line-height: 1.3;
+}
+#user-info {
+	text-align: left;
+	margin-bottom: 26px;
+}
+#user-info th {
+	width:125px;
+	font-weight: bold;
+}
+#user-info th,
+#user-info td {
+	padding: 5px;
+}
+#account h1 {
+	font-weight: bold;
+    font-size: 29px;
+    margin-bottom: 16px;
+}
+#account h3 {
+	margin-bottom: 10px;
+    font-size: 20px;
 }
 
 /* media queries */

@@ -44,7 +44,7 @@ app.config(function($routeProvider, $locationProvider){
 
 
 app.controller('headerCtrl', function($scope, $http, $cookies) {
-	if(typeof $cookies.getAll() != 'undefined'){
+	if(typeof $cookies.get('username') != 'undefined'){
 	  set();
 	  hide();
 	}
@@ -213,20 +213,27 @@ app.controller('bookCtrl', function($scope, $http, $routeParams) {
   });
 });
 
-app.controller('accountCtrl', function($scope, $http, $route, $cookies) {
+app.controller('accountCtrl', function($scope, $http, $route, $cookies, $q, SearchService) {
 	$scope.books = null;
-	if(typeof $cookies.getAll() != 'undefined'){
+	$scope.user = null;
+	if(typeof $cookies.get('username') != 'undefined'){
 		$scope.u_name = $cookies.get('username');
 		$scope.u_id = $cookies.get('id');
 	}
-	
+
+	$http.get('http://localhost/textbookswap/webapi/users/' + $scope.u_id)
+	.success(function(response){
+		$scope.user = response;
+	});
 	$http.get('http://localhost/textbookswap/webapi/books')
 	.success(function(response){
 		$scope.allbooks = response;
+		search();
 	});
-	// filter results on button click
-	$scope.search = function(){
-		$scope.user.books = SearchService.filtered_result($scope.allbooks, $scope.user.id, "user");
-	}
+	
     $scope.$route = $route;
+    
+    function search(){
+  	  $scope.books = SearchService.filtered_result($scope.allbooks, "CST", "course");
+    }
 });
