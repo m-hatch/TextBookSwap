@@ -5,6 +5,7 @@
 	<div ng-if="user">
 		<h3><em>Welcome&nbsp;{{ user.username }}!</em></h3>
 		<h1>User Details</h1>
+		<a href="" class="hlink">Edit details</a>
 		
 		<table id="user-info">
 		  <tr>
@@ -19,12 +20,10 @@
 			<th>Email:</th>
 			<td>{{ user.email }}</td>
 		  </tr>
-		  <tr>
-			<td><a href="" class="hlink">Edit details</a></td>
-		  </tr>
 		</table>
 		
 		<h1>My Books</h1>
+		<a href="" class="hlink">Add book</a>
 		
 		<ul class="bk-grid">
 		  <!-- loop items -->
@@ -43,7 +42,7 @@
 		      <div class="bk-info">
 		        <h4 class="center">{{ book.title }}</h4>
 		        <p><img src="img/calendar.png" class="left"/><a href="" class="left">Edit book</a></p>
-		        <p><img src="img/delete.png" class="left"/><a href="#" class="left">Remove book</a></p>
+		        <p><img src="img/delete.png" class="left"/><a href="" ng-click="remove(book.id)" class="left">Remove book</a></p>
 		        <p class="description center">{{ book.author }}<br>{{ book.dept + " " + book.course }}</p>
 		      </div>
 		    </div>

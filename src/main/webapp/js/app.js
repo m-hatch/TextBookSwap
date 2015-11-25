@@ -164,6 +164,14 @@ app.service('SearchService', function(){
 	  }
 });
 
+//popup service
+app.service('popupService', function($window){
+
+  this.showPopup=function(message){
+    return $window.confirm(message);
+  }
+});
+
 app.controller('titleCtrl', function($scope, $http, $route, SearchService) {
   $scope.books = null;
   $scope.placeholder = "search titles...";
@@ -213,7 +221,8 @@ app.controller('bookCtrl', function($scope, $http, $routeParams) {
   });
 });
 
-app.controller('accountCtrl', function($scope, $http, $route, $cookies, $q, SearchService) {
+app.controller('accountCtrl', function($scope, 
+		$http, $route, $cookies, SearchService, popupService) {
 	$scope.books = null;
 	$scope.user = null;
 	if(typeof $cookies.get('username') != 'undefined'){
@@ -230,6 +239,13 @@ app.controller('accountCtrl', function($scope, $http, $route, $cookies, $q, Sear
 		$scope.allbooks = response;
 		search();
 	});
+	
+	$scope.remove = function(id) {
+	  if (popupService.showPopup('Are you sure you want to delete this?')) {
+	    $http.delete('http://localhost/textbookswap/webapi/books/' + id);
+	    $route.reload();
+	  }
+	};
 	
     $scope.$route = $route;
     
