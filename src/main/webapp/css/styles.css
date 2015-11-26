@@ -140,6 +140,9 @@ header {
   border-radius: 10px;
   background: #fff;
 }
+#add-book > div {
+  margin: 5% auto;
+}
 .close {
   background: #606061;
   color: #fff;

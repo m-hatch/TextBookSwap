@@ -167,9 +167,47 @@ app.service('SearchService', function(){
 //popup service
 app.service('popupService', function($window){
 
-  this.showPopup=function(message){
+  this.showPopup = function(message){
     return $window.confirm(message);
   }
+});
+
+//format date service
+app.service('formatDateService', function(){
+	this.formatDate = function(d){
+		//get the month
+	    var month = d.getMonth();
+	    //get the day
+	    var day = d.getDate();
+	    //get the year
+	    var year = d.getFullYear();
+
+	    //pull the last two digits of the year
+	    year = year.toString().substr(2,2);
+
+	    //increment month by 1 since it is 0 indexed
+	    month = month + 1;
+	    //converts month to a string
+	    month = month + "";
+
+	    //if month is 1-9 pad right with a 0 for two digits
+	    if (month.length == 1)
+	    {
+	        month = "0" + month;
+	    }
+
+	    //convert day to string
+	    day = day + "";
+
+	    //if day is between 1-9 pad right with a 0 for two digits
+	    if (day.length == 1)
+	    {
+	        day = "0" + day;
+	    }
+
+	    //return the string "MM/dd/yy"
+	    return month + "/" + day + "/" + year;
+	}
 });
 
 app.controller('titleCtrl', function($scope, $http, $route, SearchService) {
@@ -222,23 +260,27 @@ app.controller('bookCtrl', function($scope, $http, $routeParams) {
 });
 
 app.controller('accountCtrl', function($scope, 
-		$http, $route, $cookies, SearchService, popupService) {
+		$http, $route, $cookies, SearchService, popupService, formatDateService) {
 	$scope.books = null;
 	$scope.user = null;
-	getUser();
+	getUser(); //gets user id from cookies
 	
+	// get user object
 	$http.get('http://localhost/textbookswap/webapi/users/' + $scope.u_id)
 	.success(function(response){
 		$scope.user = response;
 	});
+	
+	// get user books
 	$http.get('http://localhost/textbookswap/webapi/books')
 	.success(function(response){
 		$scope.allbooks = response;
 		search();
 	});
 	
+	// edit user
 	$scope.showAccount = function() {
-		$scope.modal = {'opacity': '1', 'pointer-events': 'auto'}
+		$scope.acct = {'opacity': '1', 'pointer-events': 'auto'}
 	};
 	
 	$scope.editAccount = function() {
@@ -252,13 +294,50 @@ app.controller('accountCtrl', function($scope,
 		.success(function(response){
 			$scope.user = response;
 		});
-		$scope.modal = {'opacity': '0', 'pointer-events': 'none'}
+		$scope.acct = {'opacity': '0', 'pointer-events': 'none'}
 	};
 	
-	$scope.closeModal = function() {
-		$scope.modal = {'opacity': '0', 'pointer-events': 'none'}
+	$scope.closeAccount = function() {
+		$scope.acct = {'opacity': '0', 'pointer-events': 'none'}
 	};
 	
+	// add book
+	$scope.newBk = {
+		title: null,
+		author: null,
+		dept: null,
+		course: null,
+		image: null,
+		price: null,
+		date: null,
+		user: null,
+		email: null
+	}
+	$scope.showNewBk = function() {
+		$scope.newbook = {'opacity': '1', 'pointer-events': 'auto'}
+	};
+	
+	$scope.addNewBk = function() {
+		var d = new Date();
+		$scope.newBk.date = formatDateService.formatDate(d);
+		$scope.newBk.user = $scope.user.id;
+		$scope.newBk.email = $scope.user.email;
+		var data = JSON.stringify($scope.newBk);
+		
+		$http.post('http://localhost/textbookswap/webapi/books', data)
+		.success(function(response){
+			var currentBooks = $scope.books;
+			var newList = currentBooks.concat(response);
+			$scope.books = newList;
+		});
+		$scope.newbook = {'opacity': '0', 'pointer-events': 'none'}
+	};
+	
+	$scope.closeNewBk = function() {
+		$scope.newbook = {'opacity': '0', 'pointer-events': 'none'}
+	};
+	
+	// delete book
 	$scope.removeBk = function(id) {
 	  if (popupService.showPopup('Are you sure you want to delete this?')) {
 	    $http.delete('http://localhost/textbookswap/webapi/books/' + id);

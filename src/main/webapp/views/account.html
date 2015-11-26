@@ -23,7 +23,7 @@
 		</table>
 		
 		<h1>My Books</h1>
-		<a href="" class="hlink">Add book</a>
+		<a href="" class="hlink" ng-click="showNewBk()">Add book</a>
 		
 		<ul class="bk-grid">
 		  <!-- loop items -->
@@ -50,9 +50,9 @@
 		 </ul>
 	  
 	  <!-- modal windows -->
-	  <div id="edit-account" class="modal" ng-style="modal" >
+	  <div id="edit-account" class="modal" ng-style="acct" >
          <div>
-           <a href="" ng-click="closeModal()" title="Close" class="close">X</a>
+           <a href="" ng-click="closeAccount()" title="Close" class="close">X</a>
 
            <form class="form-login">
 
@@ -87,6 +87,74 @@
                  <div class="form-row">
                    <div class="center">
                      <a href="" class="loginBtn" ng-click="editAccount()">Edit</a>
+                   </div>
+                 </div>
+
+               </div>
+             </div><!-- end .form-log-in-with-email -->
+
+         </form>
+         </div>
+       </div>
+       
+       <div id="add-book" class="modal" ng-style="newbook" >
+         <div>
+           <a href="" ng-click="closeNewBk()" title="Close" class="close">X</a>
+
+           <form class="form-login">
+
+             <div class="form-log-in-with-email">
+               <div class="form-white-background">
+
+                 <div class="form-title-row">
+                   <h1>Add book</h1>
+                 </div>
+
+                 <div class="form-row">
+                   <label>
+                     <span>Title</span>
+                     <input type="text" name="title" ng-model="newBk.title">
+                   </label>
+                 </div>
+
+                 <div class="form-row">
+                   <label>
+                     <span>Author</span>
+                     <input type="text" name="author" ng-model="newBk.author">
+                   </label>
+                 </div>
+
+                 <div class="form-row">
+                   <label>
+                     <span>Department</span>
+                     <input type="text" name="text" ng-model="newBk.dept">
+                   </label>
+                 </div>
+                 
+                 <div class="form-row">
+                   <label>
+                     <span>Course</span>
+                     <input type="text" name="text" ng-model="newBk.course">
+                   </label>
+                 </div>
+                 
+                 <div class="form-row">
+                   <label>
+                     <span>Image</span>
+                     <input type="text" name="text" ng-model="newBk.image">
+                   </label>
+                 </div>
+                 
+                 <div class="form-row">
+                   <label>
+                     <span>Price</span>
+                     <input type="text" name="text" ng-model="newBk.price">
+                   </label>
+                 </div>
+
+                 <div class="form-row">
+                   <div class="center">
+                     <a href="" class="loginBtn" ng-click="addNewBk()">Add</a>
                    </div>
                  </div>
 

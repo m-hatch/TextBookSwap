@@ -16,7 +16,7 @@ public class BookConverter {
                 .append("title", b.getTitle()).append("dept", b.getDept())
                 .append("course", b.getCourse()).append("image",  b.getImage())
                 .append("price", b.getPrice()).append("date", b.getDate())
-                .append("author", b.getAuthor());
+                .append("author", b.getAuthor()).append("email", b.getEmail());
         if (b.getId() != null)
             builder = builder.append("_id", new ObjectId(b.getId()));
         if (b.getUser() != null)
@@ -35,6 +35,7 @@ public class BookConverter {
         b.setImage((String) doc.get("image"));
         b.setPrice((String) doc.get("price"));
         b.setDate((String) doc.get("date"));
+        b.setEmail((String) doc.get("email"));
         
         ObjectId id = (ObjectId) doc.get("_id");
         b.setId(id.toString());

@@ -26,6 +26,10 @@ html{
     margin-bottom: 12px;
 }
 
+#add-book .form-log-in-with-email .form-row{
+	margin-bottom: 5px;
+}
+
 .form-log-in-with-email .form-title-row{
     margin-bottom: 24px;
 }

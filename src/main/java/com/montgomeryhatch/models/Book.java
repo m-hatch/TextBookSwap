@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Book {
-	private String id, user, title, author, dept, course, image, price, date;
+	private String id, user, title, author, dept, course, image, price, date, email;
 
 	public Book(){
 		
@@ -90,6 +90,13 @@ public class Book {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	
 }
