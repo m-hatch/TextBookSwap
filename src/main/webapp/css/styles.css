@@ -362,7 +362,7 @@ p#copy {
 .bk-info h4{
   color:#04bfea;
   text-transform:uppercase;
-  letter-spacing:2px;
+  letter-spacing:1.8px;
   font-size:15px;
   font-weight: 700;
   padding:45px 0px 10px 10px;
@@ -419,7 +419,12 @@ p#copy {
 }
 .bk-item .bk-info h4{
   padding-top: 20px;
-  padding-bottom: 16px;
+  padding-bottom: 10px;
+}
+.bk-item .bk-info h4 .author{
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 1px;
 }
 .bk-info p{
   padding-top:5px!important;
@@ -431,6 +436,11 @@ p#copy {
   font-size: 12px;
   padding-top: 14px !important;
   /*font-weight: 700;*/
+}
+.bk-info .price{
+  line-height: 1.5;
+  font-size: 15px;
+  font-style: normal;
 }
 html.ie8 .bk-info{
   display:none!important;

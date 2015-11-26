@@ -19,13 +19,17 @@
        
       <div class="bk-info">
         <h4 class="center">              
-          <a class="link" ng-href="books/{{ book.id }}" title="">{{ book.title }}</a>
+          <a class="link" ng-href="books/{{ book.id }}" title="">{{ book.title }}</a><br>
+          <span class="author">{{ book.author }}</span>
         </h4>
           <p><img src="img/calendar.png" class="left"/><a ng-href="books/{{ book.id }}" class="left">Item description</a></p>
-          <p><img src="img/contact.png" class="left"/><a href="mailto:abc@user.com" class="left">Contact seller</a></p>
-          <p><img src="img/like.png" class="left"/><a href="#" class="left">Add To Favourites</a></p>
-          <p><img src="img/delete.png" class="left"/><a href="#" class="left">Remove Favourite</a></p>
-          <p class="description center">{{ book.author }}<br>{{ book.dept + " " + book.course }}</p>
+          <p><img src="img/contact.png" class="left"/><a ng-href="mailto:{{ book.email }}" class="left">Contact seller</a></p>
+          <p><img src="img/like.png" class="left"/><a href="#" class="left">Add To Favorites</a></p>
+          <p><img src="img/delete.png" class="left"/><a href="#" class="left">Remove Favorite</a></p>
+          <p class="description center">
+          	{{ book.dept + " " + book.course }}<br>
+          	<span class="price">${{ book.price }}</span>
+          </p>
         </div>
       </div>
     </li>
