@@ -263,6 +263,7 @@ app.controller('accountCtrl', function($scope,
 		$http, $route, $cookies, SearchService, popupService, formatDateService) {
 	$scope.books = null;
 	$scope.user = null;
+	$scope.bkMsg = '';
 	getUser(); //gets user id from cookies
 	
 	// get user object
@@ -314,7 +315,19 @@ app.controller('accountCtrl', function($scope,
 		email: null
 	}
 	$scope.showNewBk = function() {
-		$scope.newbook = {'opacity': '1', 'pointer-events': 'auto'}
+		$scope.newbook = {'opacity': '1', 'pointer-events': 'auto'};
+		$scope.bkMsg = 'Add';
+		$scope.newBk = {
+			title: null,
+			author: null,
+			dept: null,
+			course: null,
+			image: null,
+			price: null,
+			date: null,
+			user: null,
+			email: null
+		}
 	};
 	
 	$scope.addNewBk = function() {
@@ -330,11 +343,11 @@ app.controller('accountCtrl', function($scope,
 			var newList = currentBooks.concat(response);
 			$scope.books = newList;
 		});
-		$scope.newbook = {'opacity': '0', 'pointer-events': 'none'}
+		$scope.newbook = {'opacity': '0', 'pointer-events': 'none'};
 	};
 	
 	$scope.closeNewBk = function() {
-		$scope.newbook = {'opacity': '0', 'pointer-events': 'none'}
+		$scope.newbook = {'opacity': '0', 'pointer-events': 'none'};
 	};
 	
 	// delete book
@@ -343,6 +356,31 @@ app.controller('accountCtrl', function($scope,
 	    $http.delete('http://localhost/textbookswap/webapi/books/' + id);
 	    $route.reload();
 	  }
+	};
+	
+	// edit book
+	$scope.showEditBk = function(id) {
+		$scope.newbook = {'opacity': '1', 'pointer-events': 'auto'};
+		$scope.bkMsg = 'Edit';
+		
+		$http.get('http://localhost/textbookswap/webapi/books/' + id)
+		.success(function(response){
+			$scope.newBk = response;
+			var d = new Date();
+			$scope.newBk.date = formatDateService.formatDate(d);
+		});
+	};
+	
+	$scope.editBk = function(id) {
+		var data = JSON.stringify($scope.newBk);
+		
+		$http.put('http://localhost/textbookswap/webapi/books/' + id, data)
+		.success(function(response){
+			//var currentBooks = $scope.books;
+			//var newList = currentBooks.concat(response);
+			//$scope.books = newList;
+		});
+		$scope.newbook = {'opacity': '0', 'pointer-events': 'none'}
 	};
 	
     $scope.$route = $route;

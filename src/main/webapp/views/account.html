@@ -41,7 +41,7 @@
 		       
 		      <div class="bk-info">
 		        <h4 class="center">{{ book.title }}</h4>
-		        <p><img src="img/calendar.png" class="left"/><a href="" class="left">Edit book</a></p>
+		        <p><img src="img/calendar.png" class="left"/><a href="" ng-click="showEditBk(book.id)" class="left">Edit book</a></p>
 		        <p><img src="img/delete.png" class="left"/><a href="" ng-click="removeBk(book.id)" class="left">Remove book</a></p>
 		        <p class="description center">{{ book.author }}<br>{{ book.dept + " " + book.course }}</p>
 		      </div>
@@ -107,7 +107,7 @@
                <div class="form-white-background">
 
                  <div class="form-title-row">
-                   <h1>Add book</h1>
+                   <h1>{{ bkMsg }}&nbsp;book</h1>
                  </div>
 
                  <div class="form-row">
@@ -152,9 +152,15 @@
                    </label>
                  </div>
 
-                 <div class="form-row">
+                 <div ng-if="bkMsg == 'Add'" class="form-row">
                    <div class="center">
                      <a href="" class="loginBtn" ng-click="addNewBk()">Add</a>
+                   </div>
+                 </div>
+                 
+                 <div ng-if="bkMsg == 'Edit'" class="form-row">
+                   <div class="center">
+                     <a href="" class="loginBtn" ng-click="editBk()">Edit</a>
                    </div>
                  </div>
 
