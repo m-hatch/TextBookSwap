@@ -63,7 +63,7 @@ app.controller('headerCtrl', function($scope, $http, $cookies) {
 		  alert("Incorrect username or password.")
 	  });
   }
-  $scope.logout = function(){
+  $scope.logout = function($window){
 	  $cookies.remove('username');
 	  $cookies.remove('id');
 	  show();

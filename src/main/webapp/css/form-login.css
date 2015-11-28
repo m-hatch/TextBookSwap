@@ -35,7 +35,9 @@ html{
 }
 
 #login .form-log-in-with-email h1,
-#signup .form-log-in-with-email h1{
+#signup .form-log-in-with-email h1,
+#edit-account .form-log-in-with-email h1,
+#add-book .form-log-in-with-email h1{
     display: inline-block;
     box-sizing: border-box;
     color:  #4c565e;
