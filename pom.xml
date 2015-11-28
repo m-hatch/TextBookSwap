@@ -25,7 +25,7 @@
             <plugin>
 	            <groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-assembly-plugin</artifactId>
-	            <version>CHOOSE LATEST VERSION HERE</version>
+	            <version>2.5.1</version>
 	            <configuration>
 	                <descriptorRefs>
 	                    <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -84,6 +84,11 @@
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
 			<version>3.0.4</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.tuckey</groupId>
+		    <artifactId>urlrewritefilter</artifactId>
+		    <version>4.0.3</version>
 		</dependency>
     </dependencies>
     <properties>
